@@ -7,15 +7,15 @@
 <add key="numberOfPages" value="1" />
 
 <add key="xeUsername" value="" />
-<<add key="xePassword" value="" />
+<add key="xePassword" value="" />
 
-<<!--ADDING PATH FOR HTML PAGE (EMAIL)-->
+<!--ADDING PATH FOR HTML PAGE (EMAIL)-->
 <add key="templatePath" value="C:\Users\..." />
   
 <add key="sendGridKey" value="" />
 <add key="mailFrom" value="info@XECrawler.gr;XECrawler" />
 
-<<!--ADDING NEW EMAIL RECIPIENT WITH NAME-->
+<!--ADDING NEW EMAIL RECIPIENT WITH NAME-->
 <add key="mailTo" value="dummy1@gmail.com;dummy2@yahoo.gr" />
 <add key ="mailToName" value="dummy1;dummy2" />
 
