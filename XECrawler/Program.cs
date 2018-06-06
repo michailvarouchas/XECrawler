@@ -69,7 +69,7 @@ namespace XECrawler
                     //}
                     #endregion
 
-                    var searchNewIds = CrawlingFunctions.GetNewPropertyIds(numberOfPages, client, url.Url).Result;
+                    var searchNewIds = CrawlingFunctions.GetNewPropertyIds(numberOfPages, client, url.Url).Result.Distinct().ToList();
                     pagesNewIds.AddRange(searchNewIds);
 
                     if (searchNewIds.Count() > 0)
