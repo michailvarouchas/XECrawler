@@ -42,7 +42,10 @@ namespace XECrawler
                         .Select(id => id.GetAttributeValue("data-id", "")).ToList();
 
                     if (pageItems.Count() == 0)
-                        return new List<string>();
+                    {
+                        Console.WriteLine($"\t no properties found on page {i}");
+                        break;
+                    }
 
                     allPropertyIds.AddRange(pageItems);
                 }
