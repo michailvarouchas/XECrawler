@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 
 namespace XECrawler
 {
@@ -83,6 +84,7 @@ namespace XECrawler
                     else
                     {
                         Console.WriteLine($"No new properties found for {url.Name}.");
+                        
                     }
                 };
             }
@@ -91,8 +93,7 @@ namespace XECrawler
             SaveIds(pagesNewIds);
 
             Console.WriteLine($"{pagesNewIds.Count()} new properties --> END");
-            Console.WriteLine("Press any to exit.");
-            Console.ReadKey();
+            Thread.Sleep(10000);
         }
 
         public static void SaveIds(List<string> ids)

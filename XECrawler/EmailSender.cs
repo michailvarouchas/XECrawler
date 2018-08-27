@@ -59,14 +59,17 @@ namespace XECrawler
             else if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 Console.WriteLine("Email will not be delivered!");
+                Console.ReadKey();
             }
             else if (response.StatusCode == (System.Net.HttpStatusCode)429)
             {
                 Console.WriteLine("You have exceeded your daily limit!");
+                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine($"Error while sending the email! \nERROR CODE:{response.StatusCode.ToString()}, \nHEADERS: {response.Headers.ToString()}, \nBODY: {response.Body.ToString()}");
+                Console.ReadKey();
             }
 
         }

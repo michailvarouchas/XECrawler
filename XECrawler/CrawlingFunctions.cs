@@ -52,6 +52,7 @@ namespace XECrawler
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Exception message: {ex.Message}, Inner Exception: {ex.InnerException}");
+                    throw;
                 }
 
             }
@@ -73,8 +74,8 @@ namespace XECrawler
             catch (Exception ex)
             {
                 Console.WriteLine($"Exception message: {ex.Message}, Inner Exception: {ex.InnerException}");
+                throw;
             }
-            return null;
         }
 
         /// <summary>
@@ -170,6 +171,11 @@ namespace XECrawler
                     var pricetext = pageHeaderItems.SelectSingleNode("div/table/tbody/tr/td[2]").InnerText;
                     if (Double.TryParse(pricetext.TrimStart('\n', ' ').TrimEnd(' ', ';', 'o', 'r', 'u', 'e', '&'), out double price))
                         propertyItem.Price = price;
+
+                    //get price per sq meter
+                    var pricePerSqMeterText = pageHeaderItems.SelectSingleNode("div/table/tbody/tr[2]/td[2]").InnerText;
+                    if (Double.TryParse(pricePerSqMeterText.TrimStart('\n', ' ').TrimEnd(' ', '.', 'μ', 'τ', '/', ';', 'o', 'r', 'u', 'e', '&'), out double pricePerSqMeter))
+                        propertyItem.PricePerSqMeter = pricePerSqMeter;
 
                     //get the properties
                     var properties = pageItems.SelectNodes("ul/li");

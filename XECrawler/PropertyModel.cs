@@ -26,6 +26,7 @@ namespace XECrawler
         public string AutonomousHeat { get; set; }
         public double Price { get; set; }
         public string Phone { get; set; }
+        public double PricePerSqMeter { get; set; }
 
         public override string ToString()
         {

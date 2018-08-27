@@ -19,6 +19,9 @@ namespace XECrawler
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet ws = package.Workbook.Worksheets.Add("Πωλήσεις");
+
+                #region Headers
+
                 ws.Cells[1, 1].Value = "ID";
                 ws.Cells[1, 2].Value = "Τύπος";
                 ws.Cells[1, 3].Value = "Τοποθεσία1";
@@ -35,13 +38,17 @@ namespace XECrawler
                 ws.Cells[1, 14].Value = "Τηλέφωνο";
                 ws.Cells[1, 15].Value = "Περιγραφή";
                 ws.Cells[1, 16].Value = "Αυτόνομη Θέρμανση";
-                for (int j = 1; j <= 16; j++)
+                ws.Cells[1, 17].Value = "Τιμή ανά τετραγωνικό";
+                ws.Cells[1, 18].Value = "Εκτιμημένα Τετραγωνικά";
+                for (int j = 1; j <= 18; j++)
                 {
                     Color colFromHex = System.Drawing.ColorTranslator.FromHtml("#64b446");
                     ws.Cells[1, j].Style.Fill.PatternType = ExcelFillStyle.Solid;
                     ws.Cells[1, j].Style.Fill.BackgroundColor.SetColor(colFromHex);
                     ws.Cells[1, j].Style.Font.Color.SetColor(Color.White);
                 }
+
+                #endregion Headers
 
                 int i = 2;
                 foreach (var property in properties)
@@ -51,7 +58,14 @@ namespace XECrawler
                     ws.Cells[i, 3].Value = property.Locationp1;
                     ws.Cells[i, 4].Value = property.Locationp2;
                     ws.Cells[i, 5].Value = property.Floor;
-                    ws.Cells[i, 6].Value = property.SqMeteters;
+                    if (property.SqMeteters == 0)
+                    {
+                        ws.Cells[i, 6].Value = "";
+                    }
+                    else
+                    {
+                        ws.Cells[i, 6].Value = property.SqMeteters;
+                    }
                     if (property.Price == 0)
                     {
                         ws.Cells[i, 7].Value = "";
@@ -84,6 +98,17 @@ namespace XECrawler
                     ws.Cells[i, 14].Value = property.Phone;
                     ws.Cells[i, 15].Value = property.Description;
                     ws.Cells[i, 16].Value = property.AutonomousHeat;
+                    if (property.PricePerSqMeter == 0)
+                    {
+                        ws.Cells[i, 17].Value = "";
+                        ws.Cells[i, 18].Value = "";
+                    }
+                    else
+                    {
+                        ws.Cells[i, 17].Value = property.PricePerSqMeter;
+                        ws.Cells[i, 18].Formula = $"ROUND(G{i}/Q{i}, 0)";
+                    }
+                    
                     i++;
                 }
 
